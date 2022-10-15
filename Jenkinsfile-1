@@ -3,6 +3,10 @@ pipeline {
         docker { image 'tomcat:8.5.83-jre8' }
     }
     stages {
+        stage('Initialize'){
+            def dockerHome = tool 'docker'
+            env.PATH = "${dockerHome}/bin:${env.PATH}"
+        }    
         stage('Test') {
             steps {
                 sh 'RUN cp -R /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps'
