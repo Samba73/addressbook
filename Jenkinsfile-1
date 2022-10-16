@@ -2,4 +2,11 @@ pipeline {
     agent {
         docker { image 'docker pull samba73/addressbook:54' }
     }
+    stages {
+        stage('complete') {
+            steps {
+                echo 'deployed, access the app'
+            }
+        }
+    }
 }
