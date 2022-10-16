@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        docker { image 'docker pull samba73/addressbook:54' }
+        docker { image 'samba73/addressbook:54' }
     }
     stages {
         stage('complete') {
