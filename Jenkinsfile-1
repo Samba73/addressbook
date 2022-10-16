@@ -3,9 +3,9 @@ pipeline {
         docker { image 'samba73/addressbook:54' }
     }
     stages {
-        stage('complete') {
+        stage('create container') {
             steps {
-                echo 'deployed, access the app'
+                sh 'echo 'Completed'
             }
         }
     }
