@@ -4,9 +4,7 @@ pipeline {
     stage('tomcat server') {
       steps {
         sh '''
-          node --version
-          git --version
-          curl --version
+          echo 'Dockerfile'
         '''
       }
     }
