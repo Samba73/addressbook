@@ -3,9 +3,14 @@ pipeline {
         docker { image 'tomcat:8.5.83-jre8' }
     }
     stages {
-        stage('Test') {
+        srage('change user') {
             steps {
-                sh 'sudo cp -R /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps'
+                sh 'su - jenkins'   
+            }
+        }    
+        stage('copy config files of tomcat') {
+            steps {
+                sh 'cp -R /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps'
             }
         }
     }
