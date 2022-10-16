@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'cp -R /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps'
+                sh 'sudo cp -R /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps'
             }
         }
     }
