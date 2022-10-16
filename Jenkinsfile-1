@@ -2,12 +2,7 @@ pipeline {
     agent {
         docker { image 'tomcat:8.5.83-jre8' }
     }
-    stages {
-        stage('change user') {
-            steps {
-                sh 'su - jenkins'   
-            }
-        }    
+    stages {  
         stage('copy config files of tomcat') {
             steps {
                 sh 'cp -R /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps'
