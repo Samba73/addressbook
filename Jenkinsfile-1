@@ -3,7 +3,7 @@ pipeline {
         docker { image 'tomcat:8.5.83-jre8' }
     }
     stages {
-        srage('change user') {
+        stage('change user') {
             steps {
                 sh 'su - jenkins'   
             }
