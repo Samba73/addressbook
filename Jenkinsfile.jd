@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+    tools {
+        jdk "jdk8"
+        maven "maven3"
+//        docker "docker"
+    }
+    stages {
+        stage('connect to scm') {
+            steps {
+                git branch: 'master', url: 'https://github.com/Samba73/addressbook.git'
+            }
+        }
+        stage('build app') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+//        stage('deploy app') {
+//            steps {
+//                sshagent(['sshconnect']) {
+//                    sh 'scp -o StrictHostKeyChecking=no target/addressbook.war vagrant@192.168.56.13:/opt/tomcat/webapps/'
+//                }
+//            }
+//        }
+        stage ('copy build file to docker host') {
+            steps {
+                sshagent(['sshconnect']) {
+                    sh 'scp -o StrictHostKeychecking=no target/*.war dockeradmin@192.168.56.14:/opt/docker'
+                    sh 'ssh dockeradmin@192.168.56.14 /opt/docker/docker.sh $BUILD_ID'
+                    sh 'ssh dockeradmin@192.168.56.14 /opt/docker/container.sh $BUILD_ID'
+                }
+            }
+        }
+//        stage('Archieve war file') {
+//            steps {
+//                archiveArtifacts artifacts: '**/*.war', fingerprint: true, followSymlinks: false
+//            }
